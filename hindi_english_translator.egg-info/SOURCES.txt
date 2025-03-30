@@ -1,0 +1,15 @@
+README.md
+setup.py
+hindi_english_translator.egg-info/PKG-INFO
+hindi_english_translator.egg-info/SOURCES.txt
+hindi_english_translator.egg-info/dependency_links.txt
+hindi_english_translator.egg-info/requires.txt
+hindi_english_translator.egg-info/top_level.txt
+src/__init__.py
+src/create_sample_dataset.py
+src/data_processor.py
+src/evaluate.py
+src/main.py
+src/trainer.py
+src/translator.py
+src/web_interface.py

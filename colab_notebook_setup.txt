@@ -1,0 +1,144 @@
+## Hindi-English Translator Fine-Tuning on Google Colab
+
+# Copy the following code blocks into a Google Colab notebook to fine-tune your translator model.
+
+### 1. Install Required Libraries
+
+```python
+!pip install -q transformers datasets evaluate sacrebleu torch tensorboard
+```
+
+### 2. Mount Google Drive (Optional)
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+### 3. Clone Your GitHub Repository or Upload Files
+
+Option A: Clone from GitHub (if your repository is public):
+```python
+!git clone https://github.com/YourUsername/Hindi-English-Translator.git
+%cd Hindi-English-Translator
+```
+
+Option B: Upload files directly:
+```python
+from google.colab import files
+import os
+
+# Create directories
+!mkdir -p data/fine_tuning_fixed
+
+# Upload data files - this will open file selection dialogs
+uploaded = files.upload()  # Upload finetune_colab.py
+for filename in uploaded.keys():
+    print(f'Uploaded {filename}')
+
+uploaded = files.upload()  # Upload train-en_to_hi.json
+!mv train-en_to_hi.json data/fine_tuning_fixed/
+
+uploaded = files.upload()  # Upload train-hi_to_en.json
+!mv train-hi_to_en.json data/fine_tuning_fixed/
+
+uploaded = files.upload()  # Upload val-en_to_hi.json
+!mv val-en_to_hi.json data/fine_tuning_fixed/
+
+uploaded = files.upload()  # Upload val-hi_to_en.json
+!mv val-hi_to_en.json data/fine_tuning_fixed/
+```
+
+### 4. Check Available GPU
+
+```python
+!nvidia-smi
+```
+
+### 5. Fine-tune the Model
+
+```python
+# English to Hindi direction (smaller subset for testing)
+!python finetune_colab.py --direction en_to_hi --epochs 3 --batch-size 8 --subset-size 50 --test
+
+# For full dataset training (uncomment when ready)
+# !python finetune_colab.py --direction en_to_hi --epochs 5 --batch-size 8 --test
+
+# For both directions (uncomment when ready)
+# !python finetune_colab.py --direction both --epochs 5 --batch-size 8 --test
+```
+
+### 6. Save the Fine-tuned Model to Google Drive (Optional)
+
+```python
+!mkdir -p /content/drive/MyDrive/HindiTranslator/models
+!cp -r models/fine_tuned/* /content/drive/MyDrive/HindiTranslator/models/
+```
+
+### 7. Download the Fine-tuned Models
+
+```python
+!zip -r fine_tuned_models.zip models/fine_tuned/
+from google.colab import files
+files.download('fine_tuned_models.zip')
+```
+
+### 8. Testing the Model Separately (if needed)
+
+```python
+import torch
+from transformers import MBartForConditionalGeneration, MBart50Tokenizer
+
+# Load the fine-tuned model
+model_path = "models/fine_tuned/final-en_to_hi"  # or final-hi_to_en
+direction = "en_to_hi"  # or "hi_to_en"
+
+# Set source and target languages
+if direction == "en_to_hi":
+    src_lang = "en_XX"
+    tgt_lang = "hi_IN"
+else:
+    src_lang = "hi_IN"
+    tgt_lang = "en_XX"
+
+# Load model and tokenizer
+tokenizer = MBart50Tokenizer.from_pretrained(model_path, src_lang=src_lang, tgt_lang=tgt_lang)
+model = MBartForConditionalGeneration.from_pretrained(model_path)
+
+if torch.cuda.is_available():
+    model = model.cuda()
+
+# Test a translation
+text = "Break a leg" if direction == "en_to_hi" else "शुभकामनाएं"
+inputs = tokenizer(text, return_tensors="pt", max_length=128, padding=True, truncation=True)
+
+if torch.cuda.is_available():
+    inputs = {k: v.cuda() for k, v in inputs.items()}
+
+outputs = model.generate(**inputs, max_length=128, num_beams=5, temperature=1.0)
+translation = tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
+
+print(f"Input: {text}")
+print(f"Translation: {translation}")
+```
+
+## Important Notes:
+
+1. **GPU Memory:** If you run out of GPU memory, try:
+   - Reducing batch size (--batch-size 4 or lower)
+   - Reducing model length (--max-length 96)
+   - Using a smaller subset for testing (--subset-size 50)
+
+2. **Runtime Limits:** Free Google Colab sessions have time limits (usually 12 hours). Save your progress regularly to Google Drive.
+
+3. **Data Format:** Ensure your data is in the correct format with proper language tags:
+   - For English to Hindi: source_lang="en_XX", target_lang="hi_IN"
+   - For Hindi to English: source_lang="hi_IN", target_lang="en_XX"
+
+4. **Best Practices:**
+   - Start with a small subset to ensure everything works
+   - Use TensorBoard to monitor training progress
+   - Save checkpoints regularly
+   - Use the test argument to verify translations immediately
+
+Happy fine-tuning! 

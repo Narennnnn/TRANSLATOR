@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: hindi_english_translator
+Version: 0.1.0
+Summary: A context-aware Hindi-English translator
+Author: Translator Team
+Author-email: nmaurya.engineer@gmail.com
+Keywords: translation,nlp,hindi,english
+Requires-Python: >=3.7
+Requires-Dist: transformers>=4.30.0
+Requires-Dist: datasets>=2.13.0
+Requires-Dist: sentencepiece>=0.1.99
+Requires-Dist: sacrebleu>=2.3.1
+Requires-Dist: nltk>=3.8.1
+Requires-Dist: torch>=2.0.0
+Requires-Dist: accelerate>=0.20.0
+Requires-Dist: evaluate>=0.4.0
+Requires-Dist: tensorboard>=2.13.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: tqdm>=4.65.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: sacremoses>=0.0.53
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: flask>=2.0.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: keywords
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

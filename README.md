@@ -9,30 +9,28 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 - Fine-tuning capabilities for improving translation quality
 - Web interface for easy interaction
 - Evaluation tools for testing translation quality
-- Google Colab compatibility
+- Local development in Cursor IDE
 
 ## Installation
 
-### Local Installation
+### Local Setup
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Narennnnn/TRANSLATOR
+git clone https://github.com/Narennnnn/TRANSLATOR.git
 cd TRANSLATOR
 ```
 
-2. Install dependencies:
+2. Run the local setup script:
 ```bash
-pip install -r requirements.txt
+python local_setup.py
 ```
 
-### Google Colab Installation
-
-Run our setup script in Google Colab:
-```python
-!pip install git+https://github.com/Narennnnn/TRANSLATOR.git
-!python -c "from setup_colab import setup_colab; setup_colab()"
-```
+This will:
+- Install all required dependencies
+- Set up the package in development mode
+- Download necessary resources
+- Create a sample dataset
 
 ## Project Structure
 
@@ -40,7 +38,6 @@ Run our setup script in Google Colab:
 ├── data/                  # Data directory for datasets
 ├── models/                # Directory to store fine-tuned models
 ├── notebooks/             # Jupyter notebooks
-│   └── Hindi_English_Translator_colab.py  # Google Colab script
 ├── src/                   # Source code
 │   ├── translator.py      # Main translator module
 │   ├── data_processor.py  # Data processing utilities
@@ -49,7 +46,11 @@ Run our setup script in Google Colab:
 │   ├── web_interface.py   # Web interface
 │   ├── main.py            # Command-line interface
 │   └── create_sample_dataset.py # Sample dataset creation
-├── setup_colab.py         # Setup script for Google Colab
+├── local_setup.py         # Local setup script
+├── run_translator.py      # Script to run the translator
+├── run_web_interface.py   # Script to run the web interface
+├── train_model.py         # Script to train the model
+├── setup.py               # Package setup script
 └── requirements.txt       # Python dependencies
 ```
 
@@ -57,29 +58,30 @@ Run our setup script in Google Colab:
 
 ### Command Line Interface
 
-Translate text from English to Hindi:
+Translate text using the command line:
 ```bash
-python src/main.py translate "Hello, how are you?" --direction en_to_hi
+python run_translator.py --text "Hello, how are you?" --direction en_to_hi
 ```
 
-Translate text from Hindi to English:
 ```bash
-python src/main.py translate "नमस्ते, आप कैसे हैं?" --direction hi_to_en
-```
-
-Fine-tune the model:
-```bash
-python src/main.py train --data data/your_dataset.csv --direction en_to_hi --epochs 3
+python run_translator.py --text "नमस्ते, आप कैसे हैं?" --direction hi_to_en
 ```
 
 ### Web Interface
 
 Run the web interface:
 ```bash
-python -c "from src.web_interface import create_app; app = create_app(); app.run(debug=True)"
+python run_web_interface.py
 ```
 
 Then open your browser and go to http://localhost:5000
+
+### Train a Model
+
+Train the translator on your data:
+```bash
+python train_model.py --data data/your_dataset.csv --direction en_to_hi --epochs 3
+```
 
 ### Python API
 
@@ -96,26 +98,27 @@ hindi_text = translator.translate_en_to_hi("Hello, how are you?")
 english_text = translator.translate_hi_to_en("नमस्ते, आप कैसे हैं?")
 ```
 
-## Google Colab
-
-You can run this translator in Google Colab:
-1. Open [Google Colab](https://colab.research.google.com/)
-2. Create a new notebook
-3. Copy and paste from `notebooks/Hindi_English_Translator_colab.py`
-
 ## Datasets
 
 We provide a small sample dataset for testing. For better results, download larger datasets:
 
-```python
-from setup_colab import download_dataset
-
-# Download IIT Bombay Hindi-English Corpus
-download_dataset('iitb')
-
-# Download WMT Hindi-English dataset
-download_dataset('wmt')
+```bash
+python local_setup.py iitb  # Download IIT Bombay Hindi-English Corpus
+python local_setup.py wmt   # Download WMT Hindi-English dataset
 ```
+
+## Development in Cursor IDE
+
+This project is optimized for development in Cursor IDE:
+
+1. Open the project folder in Cursor
+2. Run the local setup script:
+   ```bash
+   python local_setup.py
+   ```
+3. Use the provided scripts to run the translator, web interface, or train models
+4. Edit the source code in the `src` directory
+5. Make changes and run the scripts to test your changes
 
 ## Fine-tuning
 
@@ -123,6 +126,11 @@ To fine-tune the model with your own data:
 
 1. Prepare a CSV file with 'english' and 'hindi' columns
 2. Run the training script:
+```bash
+python train_model.py --data data/your_dataset.csv --direction en_to_hi --epochs 3
+```
+
+Or use the Python API:
 ```python
 from src.data_processor import DataProcessor
 from src.trainer import TranslationTrainer
