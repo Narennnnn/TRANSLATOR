@@ -17,11 +17,7 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 
 1. Clone the repository:
 ```bash
-<<<<<<< Updated upstream
 git clone https://github.com/Narennnnn/TRANSLATOR
-=======
-git clone https://github.com/Narennnnn/TRANSLATOR.git
->>>>>>> Stashed changes
 cd TRANSLATOR
 ```
 
