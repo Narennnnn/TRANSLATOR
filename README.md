@@ -17,8 +17,8 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/Hindi-English-Translator.git
-cd Hindi-English-Translator
+git clone https://github.com/Narennnnn/TRANSLATOR
+cd TRANSLATOR
 ```
 
 2. Install dependencies:
