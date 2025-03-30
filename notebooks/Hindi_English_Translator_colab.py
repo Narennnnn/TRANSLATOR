@@ -5,9 +5,9 @@
 # Cell 1: Setup
 # --------------
 # Clone the repository
-!git clone https://github.com/your-username/Hindi-English-Translator.git
+!git clone https://github.com/Narennnnn/TRANSLATOR.git
 # Change to the project directory
-%cd Hindi-English-Translator
+%cd TRANSLATOR
 # Install dependencies
 !pip install -r requirements.txt
 

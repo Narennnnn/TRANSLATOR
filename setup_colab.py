@@ -19,7 +19,7 @@ def setup_colab():
     # Clone the repository if needed
     if not os.path.exists('Translator'):
         logger.info("Cloning repository...")
-        subprocess.run(['git', 'clone', 'https://github.com/your-username/Hindi-English-Translator.git', 'Translator'])
+        subprocess.run(['git', 'clone', 'https://github.com/Narennnnn/TRANSLATOR.git', 'Translator'])
         os.chdir('Translator')
     elif os.path.exists('Translator'):
         os.chdir('Translator')

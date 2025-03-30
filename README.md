@@ -17,7 +17,11 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 
 1. Clone the repository:
 ```bash
+<<<<<<< Updated upstream
 git clone https://github.com/Narennnnn/TRANSLATOR
+=======
+git clone https://github.com/Narennnnn/TRANSLATOR.git
+>>>>>>> Stashed changes
 cd TRANSLATOR
 ```
 
@@ -30,7 +34,7 @@ pip install -r requirements.txt
 
 Run our setup script in Google Colab:
 ```python
-!pip install git+https://github.com/your-username/Hindi-English-Translator.git
+!pip install git+https://github.com/Narennnnn/TRANSLATOR.git
 !python -c "from setup_colab import setup_colab; setup_colab()"
 ```
 
