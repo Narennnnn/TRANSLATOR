@@ -21,8 +21,11 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 ```bash
 git clone https://github.com/Narennnnn/TRANSLATOR.git
 cd TRANSLATOR
+<<<<<<< Updated upstream
 git clone https://github.com/Narennnnn/TRANSLATOR.git
 cd TRANSLATOR
+=======
+>>>>>>> Stashed changes
 ```
 
 2. Create a virtual environment and install dependencies:
@@ -32,9 +35,18 @@ source fresh_venv/bin/activate  # On Windows: fresh_venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+<<<<<<< Updated upstream
 3. Run the setup script:
 ```bash
 python local_setup.py
+=======
+### Google Colab Installation
+
+Run our setup script in Google Colab:
+```python
+!pip install git+https://github.com/Narennnnn/TRANSLATOR.git
+!python -c "from setup_colab import setup_colab; setup_colab()"
+>>>>>>> Stashed changes
 ```
 
 ## Project Structure
