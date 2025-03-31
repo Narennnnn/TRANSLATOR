@@ -2,7 +2,7 @@
 
 A context-aware Hindi-English translator that properly handles idioms and phrases in both languages. Built using the Transformer-based neural machine translation approach with fine-tuning for idiomatic expressions.
 
-[![Demo Video](https://cdn.loom.com/sessions/thumbnails/b0d60637e22147eabd5803dab2b7f0e6-with-play.gif)](https://www.loom.com/share/b0d60637e22147eabd5803dab2b7f0e6?sid=ee0f6ce4-6b09-47ea-8144-1319e71ec052)
+[Demo Video](https://www.loom.com/share/b0d60637e22147eabd5803dab2b7f0e6?sid=ee0f6ce4-6b09-47ea-8144-1319e71ec052)
 
 ## Features
 
