@@ -21,6 +21,8 @@ A context-aware Hindi-English translator that properly handles idioms and phrase
 ```bash
 git clone https://github.com/Narennnnn/TRANSLATOR.git
 cd TRANSLATOR
+git clone https://github.com/Narennnnn/TRANSLATOR.git
+cd TRANSLATOR
 ```
 
 2. Create a virtual environment and install dependencies:
